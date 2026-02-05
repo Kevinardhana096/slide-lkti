@@ -52,7 +52,7 @@ body {
     left: 0;
 }
 
-/* Futuristic Grid Background */
+/* Futuristic Grid Background - Static (optimized) */
 body::before {
     content: '';
     position: fixed;
@@ -66,17 +66,7 @@ body::before {
     background-size: 50px 50px;
     pointer-events: none;
     z-index: 1;
-    animation: gridMove 20s linear infinite;
-}
-
-@keyframes gridMove {
-    0% {
-        background-position: 0 0;
-    }
-
-    100% {
-        background-position: 50px 50px;
-    }
+    /* Animation removed for performance */
 }
 
 /* Presentation Container */
@@ -91,31 +81,9 @@ body::before {
     overflow: hidden;
 }
 
-/* Scan Line Effect */
+/* Scan Line Effect - Disabled for performance */
 .presentation::before {
-    content: '';
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(transparent 0%,
-            rgba(0, 217, 255, 0.02) 50%,
-            transparent 100%);
-    background-size: 100% 4px;
-    pointer-events: none;
-    z-index: 999;
-    animation: scanline 8s linear infinite;
-}
-
-@keyframes scanline {
-    0% {
-        background-position: 0 0;
-    }
-
-    100% {
-        background-position: 0 100vh;
-    }
+    display: none;
 }
 
 /* Slide Wrapper */
@@ -193,8 +161,8 @@ body::before {
 /* Hero Slide */
 .slide-hero {
     background: var(--gradient-hero);
-    background-size: 200% 200%;
-    animation: gradientShift 8s ease infinite;
+    background-size: 100% 100%;
+    /* Gradient animation removed for performance */
     color: var(--white);
     position: relative;
     overflow: hidden;
@@ -208,9 +176,10 @@ body::before {
     background: radial-gradient(circle, rgba(0, 217, 255, 0.25) 0%, transparent 70%);
     top: clamp(-100px, -15vw, -200px);
     right: clamp(-100px, -15vw, -200px);
-    animation: float 8s ease-in-out infinite;
     z-index: 1;
-    filter: blur(60px);
+    filter: blur(30px);
+    will-change: transform;
+    transform: translateZ(0);
 }
 
 .slide-hero::after {
@@ -221,9 +190,10 @@ body::before {
     background: radial-gradient(circle, rgba(139, 92, 246, 0.3) 0%, transparent 70%);
     bottom: clamp(-80px, -12vw, -150px);
     left: clamp(-80px, -12vw, -150px);
-    animation: float 10s ease-in-out infinite reverse;
     z-index: 1;
-    filter: blur(60px);
+    filter: blur(30px);
+    will-change: transform;
+    transform: translateZ(0);
 }
 
 .slide-hero .container {
@@ -247,7 +217,7 @@ body::before {
     left: clamp(-15px, -1.5vw, -20px);
     border-right: none;
     border-bottom: none;
-    animation: cornerPulse 3s ease-in-out infinite;
+    /* Pulse animation removed for performance */
 }
 
 .slide-hero .container::after {
@@ -255,7 +225,7 @@ body::before {
     right: clamp(-15px, -1.5vw, -20px);
     border-left: none;
     border-top: none;
-    animation: cornerPulse 3s ease-in-out infinite 1.5s;
+    /* Pulse animation removed for performance */
 }
 
 @keyframes cornerPulse {
@@ -280,11 +250,9 @@ body::before {
     line-height: 1;
     margin-bottom: clamp(15px, 2vw, 30px);
     text-transform: uppercase;
-    text-shadow: 0 0 40px rgba(0, 217, 255, 0.6),
-        0 0 80px rgba(0, 217, 255, 0.4),
-        0 0 120px rgba(139, 92, 246, 0.3),
-        0 5px 20px rgba(0, 0, 0, 0.5);
-    animation: titleGlow 3s ease-in-out infinite alternate;
+    text-shadow: 0 0 30px rgba(0, 217, 255, 0.5),
+        0 5px 15px rgba(0, 0, 0, 0.4);
+    /* Animation removed for performance */
     position: relative;
 }
 
@@ -301,7 +269,7 @@ body::before {
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
-    animation: holographicShift 4s linear infinite;
+    /* Animation removed for performance */
     opacity: 0.3;
 }
 
@@ -318,9 +286,7 @@ body::before {
 .slide-hero h1 span {
     display: block;
     color: var(--accent);
-    text-shadow: 0 0 60px rgba(0, 240, 255, 0.9),
-        0 0 100px rgba(0, 240, 255, 0.5),
-        0 0 140px rgba(139, 92, 246, 0.3);
+    text-shadow: 0 0 30px rgba(0, 240, 255, 0.6);
     font-size: clamp(0.6em, 0.8em, 0.85em);
     letter-spacing: clamp(3px, 0.8vw, 12px);
 }
@@ -353,22 +319,16 @@ body::before {
     margin-bottom: clamp(25px, 3vw, 40px);
     text-transform: uppercase;
     letter-spacing: clamp(1px, 0.2vw, 3px);
-    box-shadow: var(--glow), inset 0 0 20px rgba(0, 217, 255, 0.2);
-    animation: badgePulse 2s ease-in-out infinite;
+    box-shadow: 0 0 20px rgba(0, 217, 255, 0.4);
+    /* Animation removed for performance */
     border: 2px solid var(--accent);
     position: relative;
     overflow: hidden;
 }
 
 .badge::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(0, 217, 255, 0.4), transparent);
-    animation: badgeShine 3s linear infinite;
+    /* Shine animation disabled for performance */
+    display: none;
 }
 
 @keyframes badgeShine {
@@ -396,10 +356,10 @@ body::before {
     background: radial-gradient(circle, rgba(0, 217, 255, 0.12) 0%, rgba(139, 92, 246, 0.08) 50%, transparent 70%);
     top: 50%;
     right: clamp(-120px, -20vw, -300px);
-    transform: translateY(-50%);
-    animation: pulse 6s ease-in-out infinite;
+    transform: translateY(-50%) translateZ(0);
+    /* Animation removed for performance */
     z-index: 1;
-    filter: blur(80px);
+    filter: blur(40px);
 }
 
 /* Dark Slide */
@@ -418,10 +378,10 @@ body::before {
     background: radial-gradient(circle, rgba(0, 217, 255, 0.2) 0%, rgba(139, 92, 246, 0.15) 50%, transparent 70%);
     top: clamp(-100px, -15vw, -200px);
     left: 50%;
-    transform: translateX(-50%);
-    animation: float 7s ease-in-out infinite;
+    transform: translateX(-50%) translateZ(0);
+    /* Animation removed for performance */
     z-index: 1;
-    filter: blur(60px);
+    filter: blur(30px);
 }
 
 .slide-dark::after {
@@ -431,7 +391,7 @@ body::before {
     height: 100%;
     background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080"><circle cx="100" cy="100" r="2" fill="rgba(0,217,255,0.4)"/><circle cx="300" cy="200" r="2" fill="rgba(139,92,246,0.3)"/><circle cx="500" cy="150" r="2" fill="rgba(0,217,255,0.5)"/><circle cx="700" cy="300" r="2" fill="rgba(139,92,246,0.4)"/><circle cx="900" cy="250" r="2" fill="rgba(0,217,255,0.3)"/><circle cx="1100" cy="400" r="2" fill="rgba(139,92,246,0.4)"/><circle cx="1300" cy="350" r="2" fill="rgba(0,217,255,0.5)"/><circle cx="1500" cy="500" r="2" fill="rgba(139,92,246,0.3)"/><circle cx="200" cy="600" r="2" fill="rgba(0,217,255,0.4)"/><circle cx="400" cy="700" r="2" fill="rgba(139,92,246,0.3)"/><circle cx="600" cy="650" r="2" fill="rgba(0,217,255,0.5)"/><circle cx="800" cy="800" r="2" fill="rgba(139,92,246,0.4)"/><circle cx="1000" cy="750" r="2" fill="rgba(0,217,255,0.3)"/><circle cx="1200" cy="900" r="2" fill="rgba(139,92,246,0.4)"/><circle cx="1400" cy="850" r="2" fill="rgba(0,217,255,0.5)"/><circle cx="1600" cy="1000" r="2" fill="rgba(139,92,246,0.3)"/></svg>');
     opacity: 0.6;
-    animation: sparkle 20s linear infinite;
+    /* Animation removed for performance */
     z-index: 1;
     pointer-events: none;
 }
@@ -455,9 +415,8 @@ body::before {
 }
 
 .slide-dark .section-title {
-    text-shadow: 0 0 30px rgba(0, 217, 255, 0.5),
-        0 0 60px rgba(139, 92, 246, 0.3),
-        0 5px 15px rgba(0, 0, 0, 0.5);
+    text-shadow: 0 0 20px rgba(0, 217, 255, 0.4),
+        0 4px 10px rgba(0, 0, 0, 0.4);
 }
 
 .section-title::after {
@@ -469,8 +428,8 @@ body::before {
     height: clamp(3px, 0.4vw, 5px);
     background: linear-gradient(90deg, var(--accent) 0%, var(--purple) 100%);
     border-radius: 3px;
-    box-shadow: var(--glow-sm);
-    animation: lineGlow 2s ease-in-out infinite alternate;
+    box-shadow: 0 0 10px rgba(0, 217, 255, 0.4);
+    /* Animation removed for performance */
 }
 
 .center .section-title::after {
@@ -678,8 +637,8 @@ body::before {
     height: clamp(8px, 1vw, 12px);
     background: var(--accent);
     border-radius: 50%;
-    box-shadow: 0 0 15px rgba(0, 217, 255, 0.8), 0 0 25px rgba(0, 217, 255, 0.4);
-    animation: dotPulse 2s ease-in-out infinite;
+    box-shadow: 0 0 8px rgba(0, 217, 255, 0.5);
+    /* Animation removed for performance */
 }
 
 .list li strong {
@@ -839,26 +798,13 @@ body::before {
     color: var(--white);
 }
 
-/* Particles Effect */
+/* Particles Effect - Disabled for performance */
 .particles {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-    z-index: 1;
-    overflow: hidden;
-    pointer-events: none;
+    display: none;
 }
 
 .particle {
-    position: absolute;
-    width: 4px;
-    height: 4px;
-    background: rgba(0, 217, 255, 0.9);
-    border-radius: 50%;
-    box-shadow: 0 0 15px rgba(0, 217, 255, 0.8), 0 0 25px rgba(139, 92, 246, 0.4);
-    animation: particleFloat 15s linear infinite;
+    display: none;
 }
 
 .particle:nth-child(1) {
@@ -3014,4 +2960,40 @@ body::before {
     .time-value {
         font-size: 1.8rem;
     }
+}
+
+/* ==========================================
+   PERFORMANCE OPTIMIZATIONS
+   ========================================== */
+
+/* Reduce motion for accessibility */
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* GPU acceleration hints for smoother transitions */
+.slide {
+    will-change: opacity, visibility;
+    transform: translateZ(0);
+    backface-visibility: hidden;
+}
+
+.slide.active {
+    will-change: auto;
+}
+
+/* Optimize transitions */
+.card,
+.list li,
+.nav-btn,
+.indicator {
+    will-change: transform;
+    backface-visibility: hidden;
 }
